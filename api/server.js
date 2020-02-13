@@ -5,14 +5,14 @@ const cors = require("cors");
 
 const server = express();
 
-server.use(morgan(dev));
+server.use(morgan("dev"));
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
 //test route
 server.get("/", (req, res) => {
-  res.send(<h3>It's Alive!</h3>);
+  res.send("<h3>It's Alive!</h3>");
 });
 
 //error handling
