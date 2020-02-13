@@ -2,10 +2,7 @@ const db = require("../data/db.config");
 const bcrypt = require("bcryptjs");
 
 function find() {
-  return db("users")
-    .limit(req.query.limit)
-    .orderBy(req.query.orderBy)
-    .select();
+  return db("users").select();
 }
 
 function findBy(filter) {
