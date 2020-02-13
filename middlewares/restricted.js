@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const db = require("../data/db.config");
+const db = require("../users/users-model");
 
 function restricted() {
   const authError = {
