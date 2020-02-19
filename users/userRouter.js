@@ -4,7 +4,7 @@ const usersModel = require('./usersModel');
 
 const router = express.Router();
 
-router.get('/', authCheck(), async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await usersModel.find();
 

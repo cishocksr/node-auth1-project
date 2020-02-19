@@ -1,9 +1,14 @@
-module.exports = (req, res, next) => {
-  if(req.session.loggedin && (req.session.loggedin === true)) {
+function authCheck() {
+  const authError = {
+    message: 'You shall not pass!'
+  };
+
+  return (req, res, next) => {
+    if (!req.session || !req.session.user ) {
+      return res.status(401).json(authError);
+    }
     next();
-  }else {
-    res.status(400).json({
-      message: 'You shall not enter!'
-    })
   }
 }
+
+module.exports = authCheck;

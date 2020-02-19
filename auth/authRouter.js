@@ -32,7 +32,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/restricted", authCheck(), async (req, res, next) => {
+router.get("/restricted", async (req, res, next) => {
   try {
     res.json({
       message: "You are authorized"
@@ -42,7 +42,7 @@ router.get("/restricted", authCheck(), async (req, res, next) => {
   }
 });
 
-router.get("/logout", authCheck(), (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.session.destroy(err => {
     if (err) {
       next(err);
