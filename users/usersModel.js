@@ -1,40 +1,32 @@
-const db = require("../data/dbConfig.js");
-const bcrypt = require('bcryptjs')
-
+const bcrypt = require('bcryptjs');
+const db = require('../data/dbConfig');
 
 function find() {
-  return db("users").select("id", "username");
+  return db('users').select('id', 'username');
 }
 
 function findBy(filter) {
-  return db("users")
-    .select("id", "username", "password")
+  return db('users')
+    .select('id', 'username', 'password')
     .where(filter);
 }
 
+async function add(user) {
+  user.password = await bcrypt.hash(user.password, 11);
+  const [id] = await db('users').insert(user);
+  return findById(id);
+}
+
 function findById(id) {
-  return db("users")
-    .select("id", "username")
+  return db('users')
+    .select('id', 'username')
     .where({ id })
     .first();
 }
 
-async function add(user) {
-  user.password = await bcrypt.hashSync(user.password, 11);
-  const [id] = await db('users').insert(user);
-  return findById(ids[0]);
-}
-
-function remove(id) {
-  return db('users')
-  .where({id})
-  .del()
-}
-
 module.exports = {
-    find,
-    findBy,
-    add,
-    findById,
-    remove
-  };
+  add,
+  find,
+  findBy,
+  findById
+};
